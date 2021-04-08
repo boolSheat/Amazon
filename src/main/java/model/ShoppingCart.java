@@ -3,27 +3,29 @@ package model;
 import java.util.*;
 
 public class ShoppingCart {
-    private Map<Product, Integer> products;
+    private double price;
+    private List<Product> products;
 
     public ShoppingCart() {
-        this.products = new HashMap<>();
+        this.products = new ArrayList<>();
+        price=0;
     }
 
-    public Set<Product> getProducts() {
-        return products.keySet();
+    public List<Product> getProducts() {
+        return products;
     }
-    public void addProductToCart(Product product, int items) {
-        if(products.containsKey(product)) {
-            products.put(product, products.get(product)+items);
-        }
-    }
-
-    public void editCart(Product product, int items) {
-        if(products.get(product) + items ==0) removeProductFromCart(product);
-        else products.put(product, products.get(product)+items);
+    public void addProductToCart(Product product) {
+        products.add(product);
+        price += product.getPrice();
     }
 
-    private void removeProductFromCart(Product product) {
+    public double getPrice() {
+        return price;
+    }
+
+    public void removeProductFromCart(Product product) {
         products.remove(product);
     }
+
+    public void clear(){products.clear();}
 }

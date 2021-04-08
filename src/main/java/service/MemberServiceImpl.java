@@ -44,11 +44,20 @@ public class MemberServiceImpl implements IMemberService{
     }
 
     @Override
-    public void addProductToShoppingCart(String memberId, String productName, int quantity) {
+    public void addProductToShoppingCart(String memberId, String productName) {
         IProductService productService = ProductServiceImpl.getProductServiceImplSingletonInstance();
         Product product = productService.getProductByName(productName);
-        getMemberById(memberId).getShoppingCart().addProductToCart(product, quantity);
-        System.out.println("Product: " + productName + " added to cart, quantity: " + quantity);
+        getMemberById(memberId).getShoppingCart().addProductToCart(product);
+        System.out.println("Product: " + productName + " added to cart");
+    }
+
+    @Override
+    public Order createOrderViaShoppingCart(String memberId, String orderId) {
+        Member member = memberRepo.getMember(memberId);
+        Order order = new Order(memberId, orderId, member.getShoppingCart());
+        member.getOrders().add(order);
+        member.getShoppingCart().clear();
+        return order;
     }
 
     @Override

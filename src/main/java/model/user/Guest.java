@@ -16,7 +16,7 @@ public class Guest {
         return shoppingCart;
     }
 
-    public void addProductToShoppingCart(Product product, int items) {
-        shoppingCart.addProductToCart(product, items);
+    public void addProductToShoppingCart(Product product) {
+        shoppingCart.addProductToCart(product);
     }
 }

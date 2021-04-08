@@ -10,6 +10,7 @@ public interface IMemberService {
     public void addAddress(String memberId, Address address);
     public void removeOngoingOrder(String memberId, String orderId);
     public Member getMemberById(String memberId);
-    public void addProductToShoppingCart(String memberId, String productName, int quantity);
+    public void addProductToShoppingCart(String memberId, String productName);
+    public Order createOrderViaShoppingCart(String memberId, String orderId);
     public Order createOrder(String memberId, String orderId);
 }

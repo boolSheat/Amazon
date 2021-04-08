@@ -6,6 +6,7 @@ import model.user.Member;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
     private String orderId;
@@ -21,6 +22,15 @@ public class Order {
         this.memberId = memberId;
         this.orderId = orderId;
         this.status = OrderStatus.CREATED;
+    }
+
+    public Order(String memberId, String orderId, ShoppingCart shoppingCart) {
+        this.memberId = memberId;
+        this.orderId = orderId;
+        this.status = OrderStatus.CREATED;
+        this.products = new ArrayList<>();
+        addProducts(shoppingCart.getProducts());
+        this.price =shoppingCart.getPrice();
     }
 
     public String getMemberId() {
