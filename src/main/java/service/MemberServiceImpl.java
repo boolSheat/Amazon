@@ -2,6 +2,7 @@ package service;
 
 import model.Address;
 import model.Order;
+import model.Product;
 import model.user.Member;
 import repo.MemberRepo;
 
@@ -34,10 +35,26 @@ public class MemberServiceImpl implements IMemberService{
     public void removeOngoingOrder(String memberId, String orderId) {
         Order orderToBeRemoved = memberRepo.getMember(memberId).getOrders().stream().filter(order -> order.getOrderId().equals(orderId)).findFirst().get();
         memberRepo.removeOngoingOrder(memberId, orderToBeRemoved);
+        System.out.println("Order: " + orderId+" removed from in process orders for member: " + memberId);
     }
 
     @Override
-    public void addNewOrder(String memberId, String orderId) {
-        memberRepo.getMember(memberId).getOrders().stream().filter(order -> order.getOrderId().equals(orderId)).findFirst().get();
+    public Member getMemberById(String memberId) {
+        return memberRepo.getMember(memberId);
+    }
+
+    @Override
+    public void addProductToShoppingCart(String memberId, String productName, int quantity) {
+        IProductService productService = ProductServiceImpl.getProductServiceImplSingletonInstance();
+        Product product = productService.getProductByName(productName);
+        getMemberById(memberId).getShoppingCart().addProductToCart(product, quantity);
+        System.out.println("Product: " + productName + " added to cart, quantity: " + quantity);
+    }
+
+    @Override
+    public Order createOrder(String memberId, String orderId) {
+        Order order = new Order(memberId, orderId);
+        memberRepo.getMember(memberId).getOrders().add(order);
+        return order;
     }
 }

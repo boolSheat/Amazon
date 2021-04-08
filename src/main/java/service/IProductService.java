@@ -10,4 +10,5 @@ public interface IProductService {
     public List<Product> getProductsByCategory(String category);
     public void addNewProduct(Product product);
     public void addNewCategory(String category);
+    public Product getProductByName(String productName);
 }

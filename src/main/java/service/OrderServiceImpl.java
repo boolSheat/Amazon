@@ -30,7 +30,6 @@ public class OrderServiceImpl implements IOrderService {
         else {
             ordersRepo.addNewOrder(order);
             IMemberService memberService = MemberServiceImpl.getMemberServiceSingletonInstance();
-            memberService.addNewOrder(order.getMemberId(), order.getOrderId());
         }
     }
 
@@ -49,6 +48,7 @@ public class OrderServiceImpl implements IOrderService {
         for(Product product: order.getProducts()) {
             price += product.getPrice();
         }
+        System.out.println("Order price is: " + price);
         return price;
     }
 }

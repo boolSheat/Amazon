@@ -39,4 +39,9 @@ public class ProductServiceImpl implements IProductService{
     public void addNewCategory(String category) {
         productRepo.addNewCategory(category);
     }
+
+    @Override
+    public Product getProductByName(String productName) {
+        return productRepo.getProductByName(productName);
+    }
 }

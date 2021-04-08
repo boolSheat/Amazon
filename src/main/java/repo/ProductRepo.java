@@ -24,11 +24,13 @@ public class ProductRepo {
     }
 
     public List<Product> getProducts() {
+
         return products;
     }
 
     public List<Product> getProductsByCategory(String category) {
         if(categoryVsProductsMap.containsKey(category)) {
+            System.out.println("Getting products by for category: " + category);
             return categoryVsProductsMap.get(category);
         }
         else {
@@ -45,12 +47,18 @@ public class ProductRepo {
         if(!categoryVsProductsMap.containsKey(product.getProductCategory())) {
             addNewCategory(product.getProductCategory());
         }
+        System.out.println("Adding product: " + product.getProductName());
         categoryVsProductsMap.get(product.getProductCategory()).add(product);
     }
 
     public void deleteProduct(Product product) {
+        System.out.println("Removing product: " + product.getProductName());
         products.remove(product);
         categoryVsProductsMap.get(product.getProductCategory()).remove(product);
+    }
+
+    public Product getProductByName(String productName) {
+        return products.stream().filter(product -> product.getProductName().equals(productName)).findFirst().get();
     }
 
 }

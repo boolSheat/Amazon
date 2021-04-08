@@ -34,6 +34,7 @@ public class OrdersRepo {
     }
 
     public void addNewOrder(Order order) {
+        System.out.println("Order:" + order.getOrderId()+ " for memberId:" + order.getMemberId()+ " placed");
         orderIdVsOrderMap.put(order.getOrderId(), order);
     }
 

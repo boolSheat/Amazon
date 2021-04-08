@@ -1,12 +1,13 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ShoppingCart {
     private Map<Product, Integer> products;
+
+    public ShoppingCart() {
+        this.products = new HashMap<>();
+    }
 
     public Set<Product> getProducts() {
         return products.keySet();

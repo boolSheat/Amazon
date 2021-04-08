@@ -1,7 +1,8 @@
 package enums;
 
 public enum OrderStatus {
-    ORDER_PLACED,
+    CREATED,
+    PLACED,
     DISPATCHED,
     DELIVERED;
 }

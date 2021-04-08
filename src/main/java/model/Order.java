@@ -16,9 +16,11 @@ public class Order {
     private String memberId;
     private Address address;
 
-    public Order(String memberId) {
+    public Order(String memberId, String orderId) {
         this.products = new ArrayList<>();
         this.memberId = memberId;
+        this.orderId = orderId;
+        this.status = OrderStatus.CREATED;
     }
 
     public String getMemberId() {
@@ -39,6 +41,11 @@ public class Order {
 
     public void addProducts(List<Product> products) {
         this.products.addAll(products);
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+        price += product.getPrice();
     }
 
     public Instant getOrderedAt() {
